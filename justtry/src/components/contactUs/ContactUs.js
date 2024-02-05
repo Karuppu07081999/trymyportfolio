@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Particle from "../Particle";
 // import Github from "./Github";
@@ -10,9 +10,18 @@ import emailjs from '@emailjs/browser';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import Swal from 'sweetalert2'
+import AOS from 'aos';
+
 
 function ContactUs() {
   const form = useRef();
+
+  const [loader, setLoader] = useState(false)
+
+  useEffect(()=>{
+    AOS.init();
+  },[])
 
   const validationSchema = Yup.object().shape({
 
@@ -41,25 +50,28 @@ function ContactUs() {
 
   const onSubmit = data => {
     console.log(JSON.stringify(data, null, 2));
+    
+    setLoader(true)
       emailjs.sendForm('service_am5sj5v', 'template_00rs98i', form.current, '8ZiFFIzrEnLWqopQu')
       .then((result) => {
           console.log(result.text);
+          setLoader(false)
+          Swal.fire({
+            title: "Submitted Successfully !",
+            text: "Thank you for your message ! We'll get back to you soon.",
+            icon: "success"
+          });
           reset()
       }, (error) => {
+          Swal.fire({
+            text: "Something went wrong ! Please try again later.",
+            icon: "error"
+          });
           console.log(error.text);
       });
   };
 
-  // const sendEmail = (e) => {
-  //   e.preventDefault();
-
-  //   emailjs.sendForm('service_am5sj5v', 'template_00rs98i', form.current, '8ZiFFIzrEnLWqopQu')
-  //     .then((result) => {
-  //         console.log(result.text);
-  //     }, (error) => {
-  //         console.log(error.text);
-  //     });
-  // };
+  
   return (
     <Container fluid className="about-section">
       <Particle />
@@ -74,10 +86,17 @@ function ContactUs() {
             }}
           >
             <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-              Contact <strong className="purple">US</strong>
+              
+
+              <div data-aos="fade-up" data-aos-duration="1000"	>
+                Contact <strong className="purple">US</strong>
+              </div>
+
             </h1>
             <div class="container">
             <div class="d-flex justify-content-center">
+
+            <div data-aos="fade-right" data-aos-duration="1500"	>
 
             <div class="card" style={{width: "30rem"}}>
   
@@ -123,27 +142,27 @@ function ContactUs() {
         </div>
 
         <div className="form-group">
+          {loader ?         <button class="btn btn-primary" type="button" disabled>
+  <span class="spinner-grow spinner-grow-sm " aria-hidden="true"></span>
+  <span role="status" className="ms-2">Loading ...</span>
+</button>:
           <button type="submit" className="btn btn-primary">
-            Send Message
-          </button>
+          Send Message
+        </button> }
+
+
+
+        
+          
         </div>
       </form>
     </div>
           
             </div>
         </div>
-  {/* <form ref={form} onSubmit={sendEmail}>
-      <label>Name</label>
-      <input type="text" name="from_name" />
-      <label>Email</label>
-      <input type="email" name="user_email" />
-      <label>Message</label>
-      <textarea name="message" />
-      <input type="submit" value="Send" />
-    </form> */}
-  
     
   </div>
+</div>
 </div>
 </div>
 </div>

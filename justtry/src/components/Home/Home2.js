@@ -14,11 +14,11 @@ function Home2() {
     <Container fluid className="home-about-section" id="about">
       <Container>
         <Row>
-          <Col md={8} className="home-about-description">
-            <h1 style={{ fontSize: "2.6em" }}>
+          <Col md={8} className="home-about-description" >
+            <h1 style={{ fontSize: "2.6em", color:"chartreuse" }}>
               LET ME <span className="purple"> INTRODUCE </span> MYSELF
             </h1>
-            <p className="home-about-body">
+            <p style={{ color:"chartreuse" }} className="home-about-body">
               I fell in love with programming and I have at least learnt
               something, I think… 🤷‍♂️
               <br />
@@ -59,13 +59,13 @@ function Home2() {
           </Col>
         </Row>
         <Row>
-          <Col md={12} className="home-about-social">
-            <h1>FIND ME ON</h1>
-            <p>
+          <Col md={12} className="home-about-social" >
+            <h1 style={{color:"chartreuse"}}>FIND ME ON</h1>
+            <p style={{color:"chartreuse"}}>
               Feel free to <span className="purple">connect </span>with me
             </p>
             <ul className="home-about-social-links">
-              <li className="social-icons">
+              {/* <li className="social-icons">
                 <a
                   // href="https://github.com/soumyajit4419"
                   href="/"
@@ -86,11 +86,10 @@ function Home2() {
                 >
                   <AiOutlineTwitter />
                 </a>
-              </li>
+              </li> */}
               <li className="social-icons">
                 <a
-                  // href="https://www.linkedin.com/in/soumyajit4419/"
-                  href="/"
+                  href="https://www.linkedin.com/in/m-karuppasamy-541390191?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour  home-social-icons"
@@ -100,8 +99,7 @@ function Home2() {
               </li>
               <li className="social-icons">
                 <a
-                  // href="https://www.instagram.com/soumyajit4419"
-                  href="/"
+                  href="https://www.instagram.com/crony_black/?utm_source=qr&igsh=dGJrbTVvNWM0NDJn"
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
